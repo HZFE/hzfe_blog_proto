@@ -1,5 +1,9 @@
 syntax = "proto3";
 
+service Article {
+	rpc GetArticle(ArticleRequest) returns (ArticleResponse) {}
+}
+
 message ArticleRequest {
 	int32 messageId = 1;
 }
@@ -9,4 +13,6 @@ message ArticleResponse {
 	string title = 2;
 	string content = 3;
 	uint32 category = 4;
+	uint32 createdAt = 5;
+	uint32 Timestamp updatedAt = 6;
 }
