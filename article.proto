@@ -1,7 +1,21 @@
 syntax = "proto3";
 
 service Article {
-	rpc GetArticle(ArticleRequest) returns (ArticleResponse) {}
+	rpc GetArticle (ArticleRequest) returns (ArticleResponse) {
+		option (google.api.http) = {
+			get: "/v1/article"
+		};
+	}
+
+	rpc GetArticles (CategoryRequest) returns (stream ArticleResponse) {
+		option (google.api.http) = {
+			get: "/v1/articles"
+		};
+	}
+}
+
+message CategoryRequest {
+	uint32 categoryId = 1;
 }
 
 message ArticleRequest {
@@ -15,4 +29,8 @@ message ArticleResponse {
 	uint32 category = 4;
 	uint32 createdAt = 5;
 	uint32 Timestamp updatedAt = 6;
+}
+
+message ArticlesResponse {
+	repeated ArticleResponse = 1;
 }
